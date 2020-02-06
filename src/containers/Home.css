@@ -1,0 +1,12 @@
+.home-container {
+    max-width: 80%;
+    margin: 3rem;
+}
+
+.home-container div[contenteditable="true"] {
+    font-family: sans-serif;
+    margin: 50px;
+    min-height: 50px;
+    border: 1px dashed #aaa;
+    padding: 5px;
+}
