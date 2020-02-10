@@ -1,0 +1,44 @@
+.editable-container {
+    position: relative;
+    max-height: 50px;
+    max-width: 100%;
+}
+
+.editable-container div[contenteditable="true"] {
+    font-family: sans-serif;
+    min-height: 50px;
+    border: 1px dashed #aaa;
+    padding: 5px;
+}
+
+.editable-container .data-list {
+    padding: 5px;
+    border: 1px dashed #aaa;
+}
+
+.editable-container .data-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.editable-container .data-list ul li {
+    border-bottom: 1px dashed #aaa;
+    cursor: pointer;
+    padding: 6px 0 6px 40px;
+} 
+
+.editable-container .data-list ul li:last-child {
+    border: none;
+}
+
+.list-container {
+    margin: 20px 0;
+    max-width: 100%;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.list-container button {
+    font-size: 14px;
+}
