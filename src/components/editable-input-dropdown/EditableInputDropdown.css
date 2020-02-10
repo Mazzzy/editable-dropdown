@@ -1,12 +1,11 @@
 .editable-container {
-    max-width: 80%;
     position: relative;
     max-height: 50px;
+    max-width: 100%;
 }
 
 .editable-container div[contenteditable="true"] {
     font-family: sans-serif;
-    margin: 50px 50px 0 50px;
     min-height: 50px;
     border: 1px dashed #aaa;
     padding: 5px;
@@ -14,7 +13,6 @@
 
 .editable-container .data-list {
     padding: 5px;
-    margin: 0 50px;
     border: 1px dashed #aaa;
 }
 
@@ -32,4 +30,15 @@
 
 .editable-container .data-list ul li:last-child {
     border: none;
+}
+
+.list-container {
+    margin: 20px 0;
+    max-width: 100%;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.list-container button {
+    font-size: 14px;
 }

@@ -1,0 +1,28 @@
+.selectable-listing button{
+    background-color: #f1edf3;
+    margin: 2px;
+    color: #000000;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+}
+
+.selectable-listing button:hover {
+    outline: none;
+    box-shadow: 1px 5px 20px -5px rgba(0,0,0,0.4);
+}
+
+.selectable-listing button:focus {
+    outline: none;
+}
+
+.selectable-listing .selected-item {
+    background-color: #714684;
+    color: #ffffff;
+    box-shadow: 1px 5px 20px -5px rgba(0,0,0,0.4);
+    border: none;
+}

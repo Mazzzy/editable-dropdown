@@ -8,9 +8,18 @@ const data = {
     "item 3" : ['3', '33', '333']
 }
 
+const bubbleList = [
+    { "id": "101", "value": "item 1" },
+    { "id": "102", "value": "The quick brown fox jumps over the lazy dog" },
+    { "id": "103", "value": "item 3" }
+]
+
 function Home() {
   return (
-    <EditableInputDropdown listData={data} />
+    <div className='home-container'>
+        <EditableInputDropdown listData={data} bubbleList={bubbleList}/>
+    </div>
+    
   );
 }
 

@@ -2,7 +2,9 @@ import React, { useState, useRef } from 'react';
 import ContentEditable from 'react-contenteditable';
 import './EditableInputDropdown.css';
 
-function EditableInputDropdown({ listData }) {
+import SelectableList from '../selectable-listing';
+
+function EditableInputDropdown({ listData, bubbleList }) {
   const [boxHtml, setBoxHtml] = useState("");
   const [showDataList, setShowDataList] = useState(false);
   const [dropdownData, setDropdownData] = useState([]);
@@ -18,14 +20,16 @@ function EditableInputDropdown({ listData }) {
         text = nd.textContent;
     if(text) {
         let filteredData = listData[text];
+        setCurrentNode(nd)
         if(filteredData) {
-            setCurrentNode(nd)
+            // setCurrentNode(nd)
             setTimeout(() => {
                 setDropdownData(filteredData);
                 setShowDataList(true);
             }, 1000)
         } else {
             setShowDataList(false);
+            setDropdownData(filteredData);
         } 
     }
     
@@ -37,8 +41,14 @@ function EditableInputDropdown({ listData }) {
     }
   }
 
-  const handleBlur = evt => {
-    //setShowDataList(false);
+  const handleKeyUp = evt => {
+    let sel = document.getSelection(),
+        nd = sel.anchorNode,
+        text = nd.textContent;
+    console.log('KEY UP ', nd)
+    // if(text) {
+    //     setCurrentNode(nd)
+    // }
   }
 
   const handleItemClick = async evt => {
@@ -79,7 +89,30 @@ function EditableInputDropdown({ listData }) {
     document.execCommand(sCmd, false, sValue); 
   }
 
+  // bubbles related stuff
+  const [selectedList, setSelectedList] = useState([]);
+  const handleMenuItemChange = async (newValue) => {
+    console.log('Item ', newValue)
+    let isFormated = await formatCurrentTxt(newValue.value);
+    console.log('Done ', isFormated)
+    if(isFormated) {
+        setSelectedList([...selectedList, newValue])
+        // editableElem.current.fireEvent('onchange');
+    }
+  }
+  
+
   return (
+    <>
+    <div className='list-container'>
+        <SelectableList 
+            mainList={bubbleList} 
+            selectedList={selectedList} 
+            handleChange={(newValue) => {
+                handleMenuItemChange(newValue)
+            }}
+        />
+    </div>
     <div className='editable-container'>
         <ContentEditable
             innerRef={editableElem}
@@ -87,7 +120,7 @@ function EditableInputDropdown({ listData }) {
             disabled={false}        
             onChange={handleChange} 
             onFocus={handleFocus}
-            onBlur={handleBlur}
+            onKeyUp={handleKeyUp}
         />
         { showDataList ? 
           <div className='data-list'>
@@ -99,6 +132,7 @@ function EditableInputDropdown({ listData }) {
           </div>
         : '' }
     </div>
+    </>
   );
 }
 
