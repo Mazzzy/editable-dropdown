@@ -97,7 +97,9 @@ function EditableInputDropdown({ listData, bubbleList }) {
     console.log('Done ', isFormated)
     if(isFormated) {
         setSelectedList([...selectedList, newValue])
-        // editableElem.current.fireEvent('onchange');
+        let changeEvent = new Event('change');
+        // Dispatch it.
+        editableElem.current.dispatchEvent(changeEvent);
     }
   }
   
@@ -120,7 +122,7 @@ function EditableInputDropdown({ listData, bubbleList }) {
             disabled={false}        
             onChange={handleChange} 
             onFocus={handleFocus}
-            onKeyUp={handleKeyUp}
+            //onKeyUp={handleKeyUp}
         />
         { showDataList ? 
           <div className='data-list'>
