@@ -11,7 +11,7 @@ It contains,
 
 ## During execution 
 
-![edit dropdown screenshot](https://github.com/Mazzzy/editable-dropdown/tree/master/assets/editable-dropdown.png)
+![edit dropdown screenshot](https://raw.githubusercontent.com/Mazzzy/editable-dropdown/master/assets/editable-dropdown.png)
 
 ## Application
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
