@@ -3,15 +3,15 @@
 This application demonstrates the custom component creation for auto-suggestion kind of input element.
 
 It contains,
-#### Editable textbox
-#### Bullet list for each new entry in box.
-#### Dropdown for suggestions based on cursor postion at respective line
-#### Entry update based on selected item from dropdown.
-#### Auto-suggestion bubbles on top to select directly.
+* Editable textbox
+* Bullet list for each new entry in box.
+* Dropdown for suggestions based on cursor postion at respective line
+* Entry update based on selected item from dropdown.
+* Auto-suggestion bubbles on top to select directly.
 
 ## During execution 
 
-![edit dropdown screenshot](https://github.com/Mazzzy/editable-dropdown/tree/master/assets/editable-dropdown.png)
+![edit dropdown screenshot](https://raw.githubusercontent.com/Mazzzy/editable-dropdown/master/assets/editable-dropdown.png)
 
 ## Application
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
