@@ -9,62 +9,57 @@ function EditableInputDropdown({ listData, bubbleList }) {
   const [showDataList, setShowDataList] = useState(false);
   const [dropdownData, setDropdownData] = useState([]);
   const editableElem = useRef(null);
-
   const [currentNode, setCurrentNode] = useState(null);
   
   const handleChange = evt => {
-    setBoxHtml(evt.target.value);
     let sel = document.getSelection(),
-        nd = sel.anchorNode,
-        // text = nd.textContent.slice( 0, sel.focusOffset );
-        text = nd.textContent;
+      nd = sel.anchorNode,
+      text = nd.textContent;
+
+    if(nd.tagName === 'DIV') {
+      // to handle removal of bullet condition when no text entered
+      setTimeout(()=> {
+        formatDoc('insertHTML', '<ul><li></li></ul>'); 
+      },0);
+    } else {
+      setBoxHtml(evt.target.value);
+    }
+        
     if(text) {
-        let filteredData = listData[text];
-        setCurrentNode(nd)
-        if(filteredData) {
-            // setCurrentNode(nd)
-            setTimeout(() => {
-                setDropdownData(filteredData);
-                setShowDataList(true);
-            }, 1000)
-        } else {
-            setShowDataList(false);
-            setDropdownData(filteredData);
-        } 
+      let filteredData = listData[text];
+      setCurrentNode(nd)
+      if(filteredData) {
+        setTimeout(() => {
+          setDropdownData(filteredData);
+          setShowDataList(true);
+        }, 1000)
+      } else {
+        setShowDataList(false);
+        setDropdownData(filteredData);
+      } 
     }
     
   };
 
   const handleFocus = evt => {
     if(!boxHtml) {
-        setBoxHtml("<ul><li></li></ul>");
+      setBoxHtml("<ul><li></li></ul>");
     }
   }
 
-  const handleKeyUp = evt => {
-    let sel = document.getSelection(),
-        nd = sel.anchorNode,
-        text = nd.textContent;
-    console.log('KEY UP ', nd)
-    // if(text) {
-    //     setCurrentNode(nd)
-    // }
-  }
-
-  const handleItemClick = async evt => {
+  // for dropdown stuff
+  const handleOptionClick = async evt => {
     let txt = evt.target.innerText;
     let isFormated = await formatCurrentTxt(txt);
-    console.log('Done ', isFormated)
     if(isFormated) {
-        setShowDataList(false);
+      setShowDataList(false);
     }
   }
 
   const formatCurrentTxt = async (txt) => {
-    console.log('Current Elem ', editableElem.current)
     if(currentNode) {
-        currentNode.textContent = txt;
-        return await setCaretAndFocus(txt.length);
+      currentNode.textContent = txt;
+      return await setCaretAndFocus(txt.length);
     }
   }
 
@@ -83,57 +78,48 @@ function EditableInputDropdown({ listData, bubbleList }) {
     return true;
   }
 
-  // formatDoc('insertText', txt);
-  const formatDoc = (sCmd, sValue) => {
-    editableElem.current.focus()
-    document.execCommand(sCmd, false, sValue); 
-  }
-
   // bubbles related stuff
   const [selectedList, setSelectedList] = useState([]);
   const handleMenuItemChange = async (newValue) => {
-    console.log('Item ', newValue)
-    let isFormated = await formatCurrentTxt(newValue.value);
-    console.log('Done ', isFormated)
-    if(isFormated) {
-        setSelectedList([...selectedList, newValue])
-        let changeEvent = new Event('change');
-        // Dispatch it.
-        editableElem.current.dispatchEvent(changeEvent);
+    let isFormatted = formatDoc('insertText', newValue.value); 
+    if(isFormatted) {
+      setSelectedList([...selectedList, newValue])
     }
   }
   
+  const formatDoc = (sCmd, sValue) => {
+    return document.execCommand(sCmd, false, sValue); 
+  }
 
   return (
     <>
-    <div className='list-container'>
-        <SelectableList 
-            mainList={bubbleList} 
-            selectedList={selectedList} 
-            handleChange={(newValue) => {
-                handleMenuItemChange(newValue)
-            }}
-        />
-    </div>
-    <div className='editable-container'>
-        <ContentEditable
-            innerRef={editableElem}
-            html={boxHtml}         
-            disabled={false}        
-            onChange={handleChange} 
-            onFocus={handleFocus}
-            //onKeyUp={handleKeyUp}
-        />
+     <div className='list-container'>
+      <SelectableList 
+        mainList={bubbleList} 
+        selectedList={selectedList} 
+        handleChange={(newValue) => {
+          handleMenuItemChange(newValue)
+        }}
+      />
+     </div>
+     <div className='editable-container'>
+      <ContentEditable
+        innerRef={editableElem}
+        html={boxHtml}         
+        disabled={false}        
+        onChange={handleChange} 
+        onFocus={handleFocus}
+      />
         { showDataList ? 
           <div className='data-list'>
             <ul>
-                {dropdownData.map((e, ind) => (
-                    <li key={ind} onClick={handleItemClick}>item {e}</li>
-                ))}
+              {dropdownData.map((e, ind) => (
+                <li key={ind} onClick={handleOptionClick}>item {e}</li>
+              ))}
             </ul>
           </div>
         : '' }
-    </div>
+     </div>
     </>
   );
 }
