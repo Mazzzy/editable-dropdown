@@ -5,7 +5,6 @@ import SelectableListItem from './list-item';
 const SelectableListing = ({ mainList, selectedList, handleChange }) => {
     const handleSelection = ({listItem, selected}) => {
         const isItemFound = checkItemExists(listItem.value);
-        // if (!selected && !isItemFound) {
         if (!isItemFound) {
             handleChange(listItem);
         }
