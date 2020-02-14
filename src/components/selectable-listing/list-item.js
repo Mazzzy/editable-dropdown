@@ -16,15 +16,13 @@ class SelectableListItem extends React.Component{
         const { listItem, isItemFound } = this.props;
         const { id, value } = listItem;
         return (
-            ! isItemFound ?  
-                <button 
-                    type="button"
-                    //className={isItemFound? 'selected-item' : ''}
-                    onClick= {() => this.changeSelection()}
-                >
-                    { value? value: id }
-                </button>
-            : ''
+            <button 
+                type="button"
+                className={isItemFound? 'selected-item' : ''}
+                onClick= {() => this.changeSelection()}
+            >
+                { value? value: id }
+            </button>
 		);	
     }
 };
