@@ -12,7 +12,6 @@
 }
 
 .editable-container .data-list {
-    padding: 5px;
     border: 1px dashed #aaa;
 }
 
@@ -27,6 +26,10 @@
     cursor: pointer;
     padding: 6px 0 6px 40px;
 } 
+
+.editable-container .data-list ul li:hover {
+    background-color: #f1edf3;
+}
 
 .editable-container .data-list ul li:last-child {
     border: none;
