@@ -26,6 +26,8 @@ function EditableInputDropdown({ listData, bubbleList }) {
       // to handle removal of bullet condition when no text entered
       setTimeout(()=> {
         formatDoc('insertHTML', '<ul><li></li></ul>'); 
+        let updatedHTML = boxHtml.replace(/<div>/gi,'').replace(/<\/div>/gi,'')
+        setBoxHtml(updatedHTML);
       },0);
     } else {
       setBoxHtml(evt.target.value);
