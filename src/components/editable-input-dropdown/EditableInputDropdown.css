@@ -27,7 +27,7 @@
     padding: 6px 0 6px 40px;
 } 
 
-.editable-container .data-list ul li:hover {
+.editable-container .data-list ul li.li-active {
     background-color: #f1edf3;
 }
 
