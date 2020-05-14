@@ -10,9 +10,11 @@ const SelectableListing = ({ mainList, selectedList, handleChange }) => {
             handleChange(listItem);
         }
     }
+
     const checkItemExists = (value) => {
         return selectedList.some(el => el.value === value)
     }
+
     return (<div className='selectable-listing'>
         {mainList.map(listItem => {
             const { value } = listItem;
